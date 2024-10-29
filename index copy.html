@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background-image: linear-gradient(0deg, #e87d7d 0%, #11a4ff 100%);
+      }
+      
+      #envelope {
+        position: absolute;
+        top: calc(50vh - 200px);
+        left: calc(50vw - 150px);
+        width: 300px;
+        height: 300px;
+      }
+      
+      #envelope > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+      }
+      
+      #back, #front, #top {
+        display: block;
+      }
+      
+      #back {
+        z-index: 0;
+      }
+      
+      #front {
+        z-index: 10;
+      }
+      
+      #top {
+        z-index: 11;
+      }
+      
+      #top.animate,
+      #front.animate,
+      #back.animate,
+      #envelope button.animate {
+        opacity: 0;
+        transition: opacity 1s;
+        transition-delay: 1s;
+      }
+      
+      #letter {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #fff;
+        padding: 5px;
+        z-index: 5;
+        left: 15px;
+        right: 15px;
+        bottom: 5px;
+        top: 105px;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        font-size: 16px;
+        display: none;
+      }
+      
+      #letter.animate {
+        /* display: flex; */
+        animation: makebig 2s forwards;
+        animation-delay: 1s;
+      }
+      
+      @keyframes makebig {
+        0% {
+          top: 105px;
+          left: 15px;
+          right: 15px;
+          bottom: 5px;
+          font-size: 16px;
+        }
+        33% {
+          top: -100px;
+          left: 15px;
+          right: 15px;
+          bottom: 150px;
+          font-size: 16px;
+        }
+
+        100% {
+          top: -10px;
+          left: -55px;
+          right: -25px;
+          bottom: -100px;
+          font-size: 24px;
+        }
+      }
+      
+      #letter h1 {
+        font-size: inherit;
+      }
+      
+      #letter h2 {
+        font-size: inherit;
+      }
+      
+      #letter img {
+        height: 50%;
+      }
+      a {
+        color: red;
+      }
+
+      #envelope button {
+        display: block;
+        z-index: 15;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        background-color: #ff5900;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        top: calc(200px - 25px);
+        left: calc(150px - 25px);
+        transition: transform 1s, background-color 1s, color 1s;
+      }
+      
+      #envelope button:hover {
+        background-color: white;
+        transform: scale(1.5);
+        color: #ff5900;
+        transition: transform 1s, background-color 1s, color 1s;
+      }
+      
+      .text h1 {
+        color: #fff;
+        text-align: center;
+      }
+    </style>
+    <script>
+      function openUp() {
+        const $opentop = document.querySelector("#opentop");
+
+        const $top = document.querySelector("#top");
+        const $front = document.querySelector("#front");
+        const $back = document.querySelector("#back");
+        const $letter = document.querySelector("#letter");
+        const $button = document.querySelector("button");
+        
+        $opentop.beginElement();
+        // Animate envelope parts
+        $top.classList.add("animate");
+        $front.classList.add("animate");
+        $back.classList.add("animate");
+        $button.classList.add("animate");
+        $letter.classList.add("animate");
+
+        // Delay the page redirect to show animation
+        setTimeout(() => {
+          window.location.assign('https://ghosts-octopus.github.io/Diwali-Greeting/');
+        }, 2500);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="text">
+      <h1>Hey! Listen, this is for you 💖....</h1>
+    </div>
+    <div id="envelope">
+      <div id="back">
+        <svg height="300" width="300">
+          <polygon points="0,100 300,100 300,300 0,300" style="fill: #4a274a;"></polygon>
+        </svg>
+      </div>
+      <div id="front">
+        <svg height="300" width="300">
+          <polygon points="0,100 150,200 300,100 300,300 0,300" style="fill: #2abad0; stroke: #fff; stroke-width: 3;"></polygon>
+        </svg>
+      </div>
+      <div id="top">
+        <svg height="300" width="300">
+          <polygon points="0,100 150,200 300,100" style="fill: #2abad0; stroke: #fff; stroke-width: 2;"><animate
+            id="opentop"
+            attributeName="points"
+            dur="0.5s"
+            fill="freeze"
+            begin="indefinite"
+            from="0,100 150,200 300,100"
+            to="0,100 150,0 300,100"
+          /></polygon>
+        </svg>
+      </div>
+      <button onclick="openUp()">Click Here</button>
+      <div id="letter">
+        <!-- <h1>Diwali Wishes!</h1>
+        <p>May your Diwali be filled with joy and light!</p> -->
+      </div>
+    </div>
+  </body>
+</html>
